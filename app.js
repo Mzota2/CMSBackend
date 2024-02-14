@@ -15,7 +15,7 @@ const groupRoutes = require('./Routes/Group');
 app.use(express.json());
 app.use(cors({
     credentials:true,
-    origin:['http://localhost:3000','http://localhost:2000']
+    origin:['http://localhost:3000','http://localhost:2000', 'https://electrical-department-d2-cms.onrender.com']
 }));
 app.use(cookieParser());
 
