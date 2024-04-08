@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const moduleSchema = new Schema({
+    
     programsId:{
         type:Array,
         default:[]
@@ -16,11 +17,20 @@ const moduleSchema = new Schema({
     },
 
     lecturer:{
-        type:Array
+        type:String
     },
 
     classDays:{
         type:Array
+    },
+
+    assignments:{
+        type:Array,
+        default:[]
+    },
+    exams:{
+        type:Array,
+        default:[]
     }
 
 

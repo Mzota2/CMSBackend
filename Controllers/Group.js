@@ -2,14 +2,14 @@ const Group = require('../Models/Group');
 
 const createGroup = async(req, res)=>{
     try {
-        const {departmentId, classesId, modulesId, groups, task} = req.body;
+        const {classesId, moduleId, groups, task} = req.body;
         const newGroup = await Group.create({
-            departmentId,
-            classesId,
-            modulesId,
+            moduleId,
             groups,
             task
         });
+
+        console.log(newGroup);
 
         res.json(newGroup);
     } catch (error) {
@@ -19,14 +19,12 @@ const createGroup = async(req, res)=>{
 
 const updateGroup = async(req, res)=>{
     try {
-        const {departmentId, classesId, modulesId, groups, task} = req.body;
+        const {departmentId, classesId, moduleId, groups, task} = req.body;
         const {id} = req.params;
         const foundGroup = await Group.findById(id);
         if(foundGroup){
             const updatedGroup = await foundGroup.updateOne({
-                departmentId,
-                classesId,
-                modulesId,
+                moduleId,
                 groups,
                 task
             }, {new:true});

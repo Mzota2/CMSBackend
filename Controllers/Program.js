@@ -19,7 +19,7 @@ const createProgram = async(req, res)=>{
 const updateProgram = async(req, res)=>{
     try {
         const {name, code, year, departmentId}=req.body;
-        const id = req.params;
+        const {id} = req.params;
         const foundProgram = await Program.findById(id);
         if(foundProgram){
             const updatedProgram = await foundProgram.updateOne({

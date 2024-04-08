@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
-async function generatePWD(){
-    const defaultPwd =  await bcrypt.hash('MUBAS%20@23', 10);
-    return defaultPwd;
-}
-
 const studentsSchema = new Schema({
     name:{
         type:String
@@ -27,7 +22,7 @@ const studentsSchema = new Schema({
 
     password:{
         type:String,
-        default:generatePWD()
+        required:true
     },
 
 
@@ -36,7 +31,12 @@ const studentsSchema = new Schema({
         default:false
     },
 
-    classId:{
+    modules:{
+        type:Array,
+        default:[]
+    },
+
+    program:{
         type:String
     }
 }, {timestamps:true});

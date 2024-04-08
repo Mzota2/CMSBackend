@@ -11,10 +11,12 @@ const groupSchema = new Schema({
     moduleId:{
         type:String
     },
+    
     groups:{
         type:Array,
         default:[]
     },
+
     task:{
         type:String,
         required:true

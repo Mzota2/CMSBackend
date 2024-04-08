@@ -13,10 +13,16 @@ const programSchema = new Schema({
         type:String
     },
 
+    modules:{
+        type:Array,
+        default:[]
+    },
     departmentId:{
         type:String,
         default:"electricalengineeringd2"
     }
+
+    
 
 
 }, {timestamps:true});

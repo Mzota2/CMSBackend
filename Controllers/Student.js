@@ -3,15 +3,17 @@ const bcrypt = require('bcrypt');
 
 const AddStudent = async(req, res)=>{
     try {
-        const {name, regNO, email, password, isClassRep, classId} = req.body;
-        const hash = await bcrypt.hashSync(password, 10);
+        const {username, regNO, email, password, isClassRep, classId, modules, program} = req.body;
+        const hash = await bcrypt.hash(password, 10);
         const newStudent = await Student.create({
-            name,
+            username,
             regNO,
             email,
             password:hash,
             isClassRep,
-            classId
+            classId,
+            modules,
+            program
         });
 
         res.json(newStudent);
@@ -30,17 +32,18 @@ const SignIn = async(req, res)=>{
             console.log('found');
             console.log(password);
             const match = await bcrypt.compare(password, foundStudent.password);
-            
+            console.log(match);
             if(match){
-                res.json({name:foundStudent.name, regNO:foundStudent.regNO, email:foundStudent.email, classId:foundStudent.classId, isClassRep:foundStudent.isClassRep})
+                res.json(foundStudent);
             }
             else{
-                res.status(403);
+                res.status(403).json("wrong password");
             }
             
         }
         else{
-            res.status(404);
+
+            res.status(404).json("student not found");
         }
         
     } catch (error) {
@@ -53,17 +56,21 @@ const updateStudent = async(req, res)=>{
         const {id} = req.params;
         const foundStudent = await Student.findById(id);
         if(foundStudent){
-            const {name, regNO, email, password, isClassRep, classId} = req.body;
+            const {username, regNO, email, program, password, isClassRep, classId, modules} = req.body;
             const hash = await bcrypt.hash(password, 10);
-            const updatedStudent = await foundStudent.updateOne({
-                name,
+
+            const student =  await Student.findOneAndUpdate({_id:id}, {
+                username,
                 regNO,
+                email,
                 password:hash,
                 isClassRep,
-                classId
-            }, {new:true});
-
-            res.json(updatedStudent);
+                classId,
+                modules,
+                program
+           }, {returnOriginal:false});
+    
+            res.json(student);
         }
         else{
             res.status(404);

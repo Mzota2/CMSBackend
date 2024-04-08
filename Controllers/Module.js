@@ -2,13 +2,14 @@ const Module = require('../Models/Module');
 
 const createModule = async(req, res)=>{
     try {
-        const {classesId, name, code, lecturer, classDays} = req.body;
+        const {classesId, name, code, lecturer, classDays, programsId} = req.body;
         const newModule = await Module.create({
             classesId,
             name,
             code,
             lecturer,
-            classDays
+            classDays,
+            programsId
         });
 
         res.json(newModule);
@@ -20,17 +21,20 @@ const createModule = async(req, res)=>{
 
 const updateModule = async(req, res)=>{
     try {
-        const {classesId, name, code, lecturer, classDays} = req.body;
+        const {classesId, exams, assignments, name, code, lecturer, classDays, programsId} = req.body;
         const {id}= req.params;
         const foundModule= await Module.findById(id);
         if(foundModule){
-            const updatedModule = foundModule.updateOne({
+            const updatedModule = await Module.findOneAndUpdate({_id:id}, {
                 classesId,
                 code,
                 name,
                 lecturer,
-                classDays
-            }, {new:true});
+                classDays,
+                programsId,
+                exams,
+                assignments
+            }, {returnOriginal:false});
 
             res.json(updatedModule);
         }
