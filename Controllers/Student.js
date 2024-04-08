@@ -57,8 +57,12 @@ const updateStudent = async(req, res)=>{
         const foundStudent = await Student.findById(id);
         if(foundStudent){
             const {username, regNO, email, program, password, isClassRep, classId, modules} = req.body;
-            const hash = await bcrypt.hash(password, 10);
-
+            
+            let hash;
+            if(password){
+                hash = await bcrypt.hash(password, 10);
+            }
+          
             const student =  await Student.findOneAndUpdate({_id:id}, {
                 username,
                 regNO,

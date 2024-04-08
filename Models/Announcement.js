@@ -12,6 +12,12 @@ const announcementSchema = new Schema({
 
     time:{
         type:String
+    },
+    description:{
+        type:String
+    },
+    duration:{
+        type:Number
     }
 
 }, {timestamps:true});
