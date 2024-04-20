@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 const AddStudent = async(req, res)=>{
     try {
         const {username, regNO, email, password, isClassRep, classId, modules, program} = req.body;
-        const hash = await bcrypt.hash(password, 10);
+       // const hash = await bcrypt.hash(password, 10);
         const newStudent = await Student.create({
             username,
             regNO,
             email,
-            password:hash,
+            password,
             isClassRep,
             classId,
             modules,
@@ -33,7 +33,7 @@ const SignIn = async(req, res)=>{
             console.log(password);
             const match = await bcrypt.compare(password, foundStudent.password);
             console.log(match);
-            if(match){
+            if(password === foundStudent?.password){
                 res.json(foundStudent);
             }
             else{
@@ -67,7 +67,7 @@ const updateStudent = async(req, res)=>{
                 username,
                 regNO,
                 email,
-                password:hash,
+                password,
                 isClassRep,
                 classId,
                 modules,
