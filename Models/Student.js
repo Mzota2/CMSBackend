@@ -12,7 +12,7 @@ const studentsSchema = new Schema({
     },
     regNO:{
         type:String,
-        unique:true
+        // unique:true
     },
 
     email:{
