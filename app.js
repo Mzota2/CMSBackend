@@ -12,6 +12,7 @@ const studentRoutes = require('./Routes/Student');
 const groupRoutes = require('./Routes/Group');
 const timeTableRoutes = require("./Routes/Timetable");
 const announcementRoutes = require("./Routes/Announcement");
+const settingsRoutes = require("./Routes/Settings");
 
 //middlewares
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use('/cms', studentRoutes);
 app.use('/cms', groupRoutes);
 app.use('/cms', timeTableRoutes);
 app.use('/cms', announcementRoutes);
+app.use('/cms', settingsRoutes);
 
 const MONGODB_URL= process.env.MONGODB_URL;
 const PORT = process.env.PORT || 2000;

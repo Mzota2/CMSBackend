@@ -25,8 +25,7 @@ const moduleSchema = new Schema({
     },
 
     assignments:{
-        type:Array,
-        default:[]
+        type:Array
     },
     exams:{
         type:Array,

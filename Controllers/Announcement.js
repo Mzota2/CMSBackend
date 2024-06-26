@@ -2,13 +2,14 @@ const Announcement = require('../Models/Announcement');
 
 const createAnnouncement = async(req, res)=>{
     try {
-        const {date, time,agenda, description, duration}=req.body;
+        const {date, time,agenda, description, duration, viewList}=req.body;
         const newAnnouncement= await Announcement.create({
             date,
             time,
             agenda,
             description,
-            duration
+            duration,
+            viewList
         });
 
         res.json(newAnnouncement);
@@ -19,7 +20,7 @@ const createAnnouncement = async(req, res)=>{
 
 const updateAnnouncement = async(req, res)=>{
     try {
-        const {date, time,agenda, description, duration}= req.body;
+        const {date, time,agenda, description, duration, viewList}= req.body;
         const {id} = req.params;
         const foundAnnouncement = await Announcement.findById(id);
         if(foundAnnouncement){
@@ -28,7 +29,8 @@ const updateAnnouncement = async(req, res)=>{
                 time,
                 agenda,
                 description,
-                duration
+                duration,
+                viewList
             }, {new:true});
 
             res.json(updatedAnnouncement);

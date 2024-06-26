@@ -17,8 +17,12 @@ const announcementSchema = new Schema({
         type:String
     },
     duration:{
-        type:Number
+        type:Object
+    },
+    viewList:{
+        type:Array
     }
+   
 
 }, {timestamps:true});
 

@@ -34,12 +34,15 @@ const updateModule = async(req, res)=>{
                 programsId,
                 exams,
                 assignments
-            }, {returnOriginal:false});
+            }, {new:true});
 
             res.json(updatedModule);
+
+            console.log('updated module');
         }
         else{
             res.status(404);
+            console.log("failed to upload module");
         }
         
     } catch (error) {
