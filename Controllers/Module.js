@@ -13,9 +13,12 @@ const createModule = async(req, res)=>{
         });
 
         res.json(newModule);
+        console.log('added module')
         
     } catch (error) {
         console.log(error)
+    }finally{
+        console.log("finished")
     }
 }
 
